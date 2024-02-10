@@ -29,6 +29,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/usersupdate/{id}', [App\Http\Controllers\UserController::class, 'updateUser']);
     Route::get('posts', [App\Http\Controllers\PostController::class, 'getPosts']);
     Route::get('posts/{id}', [App\Http\Controllers\PostController::class, 'getPostById']);
+    Route::get('date/posts-by-date', [App\Http\Controllers\PostController::class, 'getDataByDate']);
+    Route::get('date/posts-by-date-author', [App\Http\Controllers\PostController::class, 'getDataByDateAndUser']);
+    Route::get('date/posts-by-date-ticked', [App\Http\Controllers\PostController::class, 'getDataByDateAndTicked']);
+    Route::get('date/posts-by-date-author-ticked', [App\Http\Controllers\PostController::class, 'getDataByDateAndUserAndTicked']);
     Route::post('/posts', [App\Http\Controllers\PostController::class, 'store']);
     Route::put('/posts/{post_id}', [App\Http\Controllers\PostController::class, 'update']);
     Route::get('/author/{post_author}', [App\Http\Controllers\PostController::class, 'getPostsByAuthor']);

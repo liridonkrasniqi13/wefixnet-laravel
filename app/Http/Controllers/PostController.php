@@ -130,6 +130,66 @@ class PostController extends Controller
         return $this->formatResponse($posts);
     }
 
+    public function getDataByDate(Request $request)
+    {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ]);
+        
+        $posts = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->get();
+        
+        return response()->json(['posts' => $posts]);
+        
+    }
+
+    public function getDataByDateAndUser(Request $request) {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'post_author' => 'required|string',
+        ]);
+        
+        // Retrieve posts based on criteria
+        $posts = Post::where('post_author', $request->post_author)
+            ->whereBetween('post_date', [$request->start_date, $request->end_date])
+            ->get();
+        
+        return response()->json(['posts' => $posts]);
+    }
+    
+    public function getDataByDateAndTicked(Request $request) {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'post_category_id' => 'required|string' 
+        ]);
+        
+        // Retrieve posts based on criteria
+        $posts = Post::where('post_category_id', $request->post_category_id)
+            ->whereBetween('post_date', [$request->start_date, $request->end_date])
+            ->get();
+        
+        return response()->json(['posts' => $posts]);
+    }
+
+    public function getDataByDateAndUserAndTicked(Request $request) {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'post_author' => 'required|string',
+            'post_category_id' => 'required|string' 
+        ]);
+        
+        // Retrieve posts based on criteria
+        $posts = Post::where('post_author', $request->post_author)
+            ->whereBetween('post_date', [$request->start_date, $request->end_date])
+            ->where('post_category_id', $request->post_category_id)
+            ->get();
+        
+        return response()->json(['posts' => $posts]);
+    }
+
     private function formatResponse($data, $statusCode = 200, $message = null)
     {
         if ($message) {
