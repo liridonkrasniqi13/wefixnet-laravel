@@ -131,17 +131,58 @@ class PostController extends Controller
     }
 
     public function getDataByDate(Request $request)
-    {
-        $request->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-        ]);
-        
-        $posts = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->get();
-        
-        return response()->json(['posts' => $posts]);
-        
-    }
+{
+    $request->validate([
+        'start_date' => 'required|date',
+        'end_date' => 'required|date',
+    ]);
+    
+    $posts = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->get();
+    
+    $sum_resiver = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('post_resiver');
+    $sum_modem = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('post_modem');
+    $sum_rg6 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('post_rg6');
+    $sum_konektor_rg6 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('post_konektor_rg6');
+    $sum_spliter = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('post_spliter');
+    $sum_konektor_tv = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('post_konektor_tv');
+    $sum_rg11 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('post_rg11');
+    $sum_t32 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('post_t32');
+    $sum_kupler_7402 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('post_kupler_7402');
+    $sum_amp = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('post_amp');
+    $sum_tap_26 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_26');
+    $sum_tap_23 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_23');
+    $sum_tap_20 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_20');
+    $sum_tap_17 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_17');
+    $sum_tap_14 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_14');
+    $sum_tap_11 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_11');
+    $sum_tap_10 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_10');
+    $sum_tap_8 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_8');
+    $sum_tap_4 = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_4');
+    
+    return response()->json([
+        'posts' => $posts,
+        'sum_resiver' => $sum_resiver,
+        'sum_modem' => $sum_modem,
+        'sum_rg6' => $sum_rg6,
+        'sum_konektor_rg6' => $sum_konektor_rg6,
+        'sum_spliter' => $sum_spliter,
+        'sum_konektor_tv' => $sum_konektor_tv,
+        'sum_rg11' => $sum_rg11,
+        'sum_t32' => $sum_t32,
+        'sum_kupler_7402' => $sum_kupler_7402,
+        'sum_amp' => $sum_amp,
+        'sum_tap_26' => $sum_tap_26,
+        'sum_tap_23' => $sum_tap_23,
+        'sum_tap_20' => $sum_tap_20,
+        'sum_tap_17' => $sum_tap_17,
+        'sum_tap_14' => $sum_tap_14,
+        'sum_tap_11' => $sum_tap_11,
+        'sum_tap_10' => $sum_tap_10,
+        'sum_tap_8' => $sum_tap_8,
+        'sum_tap_4' => $sum_tap_4,
+    ]);
+}
+
 
     public function getDataByDateAndUser(Request $request) {
         $request->validate([
@@ -150,12 +191,37 @@ class PostController extends Controller
             'post_author' => 'required|string',
         ]);
         
-        // Retrieve posts based on criteria
         $posts = Post::where('post_author', $request->post_author)
-            ->whereBetween('post_date', [$request->start_date, $request->end_date])
-            ->get();
-        
-        return response()->json(['posts' => $posts]);
+    ->whereBetween('post_date', [$request->start_date, $request->end_date])
+    ->get();
+
+$sums = Post::where('post_author', $request->post_author)
+    ->whereBetween('post_date', [$request->start_date, $request->end_date])
+    ->selectRaw('SUM(post_resiver) as sum_resiver')
+    ->selectRaw('SUM(post_modem) as sum_modem')
+    ->selectRaw('SUM(post_rg6) as sum_rg6')
+    ->selectRaw('SUM(post_konektor_rg6) as sum_konektor_rg6')
+    ->selectRaw('SUM(post_spliter) as sum_spliter')
+    ->selectRaw('SUM(post_konektor_tv) as sum_konektor_tv')
+    ->selectRaw('SUM(post_rg11) as sum_rg11')
+    ->selectRaw('SUM(post_t32) as sum_t32')
+    ->selectRaw('SUM(post_kupler_7402) as sum_kupler_7402')
+    ->selectRaw('SUM(post_amp) as sum_amp')
+    ->selectRaw('SUM(tap_26) as sum_tap_26')
+    ->selectRaw('SUM(tap_23) as sum_tap_23')
+    ->selectRaw('SUM(tap_20) as sum_tap_20')
+    ->selectRaw('SUM(tap_17) as sum_tap_17')
+    ->selectRaw('SUM(tap_14) as sum_tap_14')
+    ->selectRaw('SUM(tap_11) as sum_tap_11')
+    ->selectRaw('SUM(tap_10) as sum_tap_10')
+    ->selectRaw('SUM(tap_8) as sum_tap_8')
+    ->selectRaw('SUM(tap_4) as sum_tap_4')
+    ->first();
+
+        return response()->json([
+            'posts' => $posts,
+            'sums' => $sums,
+        ]);
     }
     
     public function getDataByDateAndTicked(Request $request) {
