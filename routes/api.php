@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DepoController;
+use App\Models\Depo;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,5 +39,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/posts/{post_id}', [App\Http\Controllers\PostController::class, 'update']);
     Route::get('/author/{post_author}', [App\Http\Controllers\PostController::class, 'getPostsByAuthor']);
     Route::delete('delete-post/{id}', [\App\Http\Controllers\PostController::class,'deletePost']);
+
+    // Category api call here
     Route::get('/categories', [CategoryController::class, 'index']);
+
+    // Depo api call here 
+    Route::get('depo',[DepoController::class, 'index']);
+    Route::post('depo-add', [DepoController::class, 'store']);
+    Route::delete('depo-delete/{id}', [DepoController::class, 'deleteDepo']);
+    Route::get('depo-id/{id}',[DepoController::class, 'getDepoId']);
+    Route::put('depo-update/{id}',[DepoController::class, 'updateDepo']);
 });
