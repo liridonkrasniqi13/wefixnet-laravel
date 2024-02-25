@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepoController;
+use App\Http\Controllers\VeturatController;
 use App\Models\Depo;
 
 /*
@@ -27,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('change-password/{id}', [\App\Http\Controllers\AuthController::class, 'changePassword']);
     Route::delete('delete-user/{id}', [\App\Http\Controllers\AuthController::class,'deleteUser']);
     Route::get('/users', [App\Http\Controllers\UserController::class, 'getAllUsers']);
+    Route::get('/users-veturat', [App\Http\Controllers\UserController::class, 'getAllUsersVeturat']);
     Route::get('/users/{id}', [App\Http\Controllers\UserController::class, 'showUser']);
     Route::post('/usersupdate/{id}', [App\Http\Controllers\UserController::class, 'updateUser']);
     Route::get('posts', [App\Http\Controllers\PostController::class, 'getPosts']);
@@ -49,4 +51,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('depo-delete/{id}', [DepoController::class, 'deleteDepo']);
     Route::get('depo-id/{id}',[DepoController::class, 'getDepoId']);
     Route::put('depo-update/{id}',[DepoController::class, 'updateDepo']);
+
+    // Vatura  api call here
+    Route::get('veturat',[VeturatController::class, 'getAllData']);
+    Route::post('veturat-add', [VeturatController::class, 'store']);
+    Route::put('veturat-update/{id}',[VeturatController::class, 'updateVeturat']);
+    Route::get('veturat-id/{id}',[VeturatController::class, 'getVeturatId']);
+
 });

@@ -15,6 +15,13 @@ class UserController extends Controller
 
         return response()->json(['users' => $users], 200);
     }
+    
+    public function getAllUsersVeturat()
+    {
+        $users = User::where('userRole', 'Vetura')->get();
+
+        return response()->json(['users' => $users], 200);
+    }
 
     public function showUser($id)
     {
