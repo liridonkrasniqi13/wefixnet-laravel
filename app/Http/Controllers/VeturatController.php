@@ -96,4 +96,16 @@ class VeturatController extends Controller
 		return response()->json( $post , 200);
 	}
 
+	public function deleteVeturat($id)
+	{
+		$post = Veturat::find($id);
+		if (!$post) {
+			return response()->json(['error' => 'Post not found'], 404);
+		}
+
+		$post->delete();
+
+		return response()->json(['message' => 'Post deleted successfully']);
+	}
+
 }

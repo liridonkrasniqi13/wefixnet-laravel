@@ -57,5 +57,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('veturat-add', [VeturatController::class, 'store']);
     Route::put('veturat-update/{id}',[VeturatController::class, 'updateVeturat']);
     Route::get('veturat-id/{id}',[VeturatController::class, 'getVeturatId']);
+    Route::delete('veturat-delete/{id}',[VeturatController::class, 'deleteVeturat']);
 
 });
