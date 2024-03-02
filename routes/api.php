@@ -41,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::put('/posts/{post_id}', [App\Http\Controllers\PostController::class, 'update']);
 	Route::get('/author/{post_author}', [App\Http\Controllers\PostController::class, 'getPostsByAuthor']);
 	Route::delete('delete-post/{id}', [\App\Http\Controllers\PostController::class, 'deletePost']);
+	Route::get('date-all-sum', [\App\Http\Controllers\PostController::class, 'getAllSumTicked']);
 
 	// Category api call here
 	Route::get('/categories', [CategoryController::class, 'index']);
@@ -60,4 +61,5 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::delete('veturat-delete/{id}', [VeturatController::class, 'deleteVeturat']);
 	Route::get('veturat/posts-by-date', [VeturatController::class, 'getDataByDateVeturat']);
 	Route::get('veturat/posts-by-date-author', [VeturatController::class, 'getDataByDateAndUserVeturat']);
+	Route::get('veturat-all-sum', [VeturatController::class, 'getAllSumVeturat']);
 });

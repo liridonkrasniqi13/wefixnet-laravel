@@ -179,4 +179,33 @@ class VeturatController extends Controller
 			'sums' => $sums,
 		]);
 	}
+
+	public function getAllSumVeturat()
+	{
+		$sums = Veturat::selectRaw('SUM(resiver) as sum_resiver')
+    ->selectRaw('SUM(modem) as sum_modem')
+    ->selectRaw('SUM(rg6) as sum_rg6')
+    ->selectRaw('SUM(konektor_rg6) as sum_konektor_rg6')
+    ->selectRaw('SUM(spliter) as sum_spliter')
+    ->selectRaw('SUM(konektor_tv) as sum_konektor_tv')
+    ->selectRaw('SUM(rg11) as sum_rg11')
+    ->selectRaw('SUM(t32) as sum_t32')
+    ->selectRaw('SUM(kupler_7402) as sum_kupler_7402')
+    ->selectRaw('SUM(amp) as sum_amp')
+    ->selectRaw('SUM(tap_26) as sum_tap_26')
+    ->selectRaw('SUM(tap_23) as sum_tap_23')
+    ->selectRaw('SUM(tap_20) as sum_tap_20')
+    ->selectRaw('SUM(tap_17) as sum_tap_17')
+    ->selectRaw('SUM(tap_14) as sum_tap_14')
+    ->selectRaw('SUM(tap_11) as sum_tap_11')
+    ->selectRaw('SUM(tap_10) as sum_tap_10')
+    ->selectRaw('SUM(tap_8) as sum_tap_8')
+    ->selectRaw('SUM(tap_4) as sum_tap_4')
+    ->first();
+
+
+		return response()->json([
+			'sums' => $sums,
+		]);
+	}
 }
