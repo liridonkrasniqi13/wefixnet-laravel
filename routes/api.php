@@ -53,6 +53,7 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::get('depo-id/{id}', [DepoController::class, 'getDepoId']);
 	Route::put('depo-update/{id}', [DepoController::class, 'updateDepo']);
 	Route::get('depo-all-sum', [DepoController::class, 'getAllSumDepo']);
+	Route::get('depo-all-sum-date', [DepoController::class, 'getAllSumDepoData']);
 
 	// Vatura  api call here
 	Route::get('veturat', [VeturatController::class, 'getAllData']);
@@ -63,4 +64,5 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::get('veturat/posts-by-date', [VeturatController::class, 'getDataByDateVeturat']);
 	Route::get('veturat/posts-by-date-author', [VeturatController::class, 'getDataByDateAndUserVeturat']);
 	Route::get('veturat-all-sum', [VeturatController::class, 'getAllSumVeturat']);
+	Route::get('veturat-all-sum-date', [VeturatController::class, 'getAllSumDateVeturat']);
 });

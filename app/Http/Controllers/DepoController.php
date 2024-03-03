@@ -137,4 +137,55 @@ class DepoController extends Controller
 			'sums' => $sums,
 		]);
 	}
+
+	public function getAllSumDepoData(Request $request)
+	{
+		$request->validate([
+			'start_date' => 'required|date',
+			'end_date' => 'required|date',
+		]);
+
+
+		$sum_resiver = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('resiver');
+		$sum_modem = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('modem');
+		$sum_rg6 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('rg6');
+		$sum_konektor_rg6 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('konektor_rg6');
+		$sum_spliter = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('spliter');
+		$sum_konektor_tv = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('konektor_tv');
+		$sum_rg11 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('rg11');
+		$sum_t32 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('t32');
+		$sum_kupler_7402 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('kupler_7402');
+		$sum_amp = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('amp');
+		$sum_tap_26 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_26');
+		$sum_tap_23 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_23');
+		$sum_tap_20 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_20');
+		$sum_tap_17 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_17');
+		$sum_tap_14 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_14');
+		$sum_tap_11 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_11');
+		$sum_tap_10 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_10');
+		$sum_tap_8 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_8');
+		$sum_tap_4 = Depo::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('tap_4');
+
+		return response()->json([
+			'sum_resiver' => $sum_resiver,
+			'sum_modem' => $sum_modem,
+			'sum_rg6' => $sum_rg6,
+			'sum_konektor_rg6' => $sum_konektor_rg6,
+			'sum_spliter' => $sum_spliter,
+			'sum_konektor_tv' => $sum_konektor_tv,
+			'sum_rg11' => $sum_rg11,
+			'sum_t32' => $sum_t32,
+			'sum_kupler_7402' => $sum_kupler_7402,
+			'sum_amp' => $sum_amp,
+			'sum_tap_26' => $sum_tap_26,
+			'sum_tap_23' => $sum_tap_23,
+			'sum_tap_20' => $sum_tap_20,
+			'sum_tap_17' => $sum_tap_17,
+			'sum_tap_14' => $sum_tap_14,
+			'sum_tap_11' => $sum_tap_11,
+			'sum_tap_10' => $sum_tap_10,
+			'sum_tap_8' => $sum_tap_8,
+			'sum_tap_4' => $sum_tap_4,
+		]);
+	}
 }
