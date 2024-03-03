@@ -52,6 +52,7 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::delete('depo-delete/{id}', [DepoController::class, 'deleteDepo']);
 	Route::get('depo-id/{id}', [DepoController::class, 'getDepoId']);
 	Route::put('depo-update/{id}', [DepoController::class, 'updateDepo']);
+	Route::get('depo-all-sum', [DepoController::class, 'getAllSumDepo']);
 
 	// Vatura  api call here
 	Route::get('veturat', [VeturatController::class, 'getAllData']);
