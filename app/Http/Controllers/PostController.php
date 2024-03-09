@@ -121,7 +121,7 @@ class PostController extends Controller
 
 	public function getPostsByAuthor($post_author)
 	{
-		$posts = Post::where('post_author', $post_author)->paginate(20);
+		$posts = Post::where('post_author', $post_author)->orderBy('post_id', 'desc')->paginate(20);
 
 		if ($posts->isEmpty()) {
 			return $this->formatResponse(null, 404, 'No posts found for the specified author');
