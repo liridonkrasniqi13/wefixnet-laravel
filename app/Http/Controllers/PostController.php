@@ -137,7 +137,7 @@ class PostController extends Controller
 			'end_date' => 'required|date',
 		]);
 
-		$posts = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->paginate(50);
+		$posts = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->orderBy('post_id', 'desc')->paginate(50);
 
 		$sum_resiver = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('post_resiver');
 		$sum_modem = Post::whereBetween('post_date', [$request->start_date, $request->end_date])->sum('post_modem');
@@ -193,7 +193,7 @@ class PostController extends Controller
 		]);
 
 		$posts = Post::where('post_author', $request->post_author)
-			->whereBetween('post_date', [$request->start_date, $request->end_date])
+			->whereBetween('post_date', [$request->start_date, $request->end_date])->orderBy('post_id', 'desc')
 			->paginate(50);
 
 		$sums = Post::where('post_author', $request->post_author)
@@ -235,7 +235,7 @@ class PostController extends Controller
 
 		// Retrieve posts based on criteria
 		$posts = Post::where('post_category_id', $request->post_category_id)
-			->whereBetween('post_date', [$request->start_date, $request->end_date])
+			->whereBetween('post_date', [$request->start_date, $request->end_date])->orderBy('post_id', 'desc')
 			->paginate(50);
 
 		$sums = Post::where('post_category_id', $request->post_category_id)
@@ -279,7 +279,7 @@ class PostController extends Controller
 		// Retrieve posts based on criteria
 		$posts = Post::where('post_author', $request->post_author)
 			->whereBetween('post_date', [$request->start_date, $request->end_date])
-			->where('post_category_id', $request->post_category_id)
+			->where('post_category_id', $request->post_category_id)->orderBy('post_id', 'desc')
 			->paginate(50);
 
 		$sums = Post::where('post_author', $request->post_author)
