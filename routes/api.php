@@ -42,6 +42,10 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::get('/author/{post_author}', [App\Http\Controllers\PostController::class, 'getPostsByAuthor']);
 	Route::delete('delete-post/{id}', [\App\Http\Controllers\PostController::class, 'deletePost']);
 	Route::get('date-all-sum', [\App\Http\Controllers\PostController::class, 'getAllSumTicked']);
+	
+	// Dashboard 
+	Route::get('ticked-all-dashboard', [\App\Http\Controllers\PostController::class, 'getAllTickedNumber']);
+	Route::get('ticked-author-dashboard', [\App\Http\Controllers\PostController::class, 'getAllTickedNumberAuthor']);
 
 	// Category api call here
 	Route::get('/categories', [CategoryController::class, 'index']);

@@ -349,4 +349,32 @@ class PostController extends Controller
 
 		return response()->json(['data' => $data], $statusCode);
 	}
+
+	public function getAllTickedNumber() {
+    $rowCountTicked = "Ticked";
+    $rowCountInstalime = "Instalime";
+    $rowCountGenerale = "Generale";
+    $rowCountRikyqje = "Rikyqje";
+    $rowCountCatv2 = "Catv2";
+    $rowCountTransfer = "Transfer";
+    
+    $rowCount = Post::count();
+    $rowCountTicked = Post::where('post_category_id', $rowCountTicked)->count();
+    $rowCountInstalime = Post::where('post_category_id', $rowCountInstalime)->count();
+    $rowCountGenerale = Post::where('post_category_id', $rowCountGenerale)->count();
+    $rowCountRikyqje = Post::where('post_category_id', $rowCountRikyqje)->count();
+    $rowCountCatv2 = Post::where('post_category_id', $rowCountCatv2)->count();
+    $rowCountTransfer = Post::where('post_category_id', $rowCountTransfer)->count();
+
+    return response()->json([
+        'count' => $rowCount,
+        'rowCountTicked' => $rowCountTicked,
+        'rowCountInstalime' => $rowCountInstalime,
+        'rowCountGenerale' => $rowCountGenerale,
+        'rowCountRikyqje' => $rowCountRikyqje,
+        'rowCountCatv2' => $rowCountCatv2,
+        'rowCountTransfer' => $rowCountTransfer,
+    ]);
+}
+
 }
