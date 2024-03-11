@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepoController;
 use App\Http\Controllers\VeturatController;
+use App\Http\Controllers\ShopController;
 use App\Models\Depo;
 
 /*
@@ -69,4 +70,9 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::get('veturat/posts-by-date-author', [VeturatController::class, 'getDataByDateAndUserVeturat']);
 	Route::get('veturat-all-sum', [VeturatController::class, 'getAllSumVeturat']);
 	Route::get('veturat-all-sum-date', [VeturatController::class, 'getAllSumDateVeturat']);
+
+	// Shop Api Call here 
+	Route::get('/shops', [ShopController::class,  'getAllShop']);
+
+
 });
