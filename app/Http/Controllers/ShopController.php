@@ -61,4 +61,17 @@ class ShopController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'The file is uploaded'], 200);
     }
+
+    public function deleteShop($id)
+	{
+		$shop = Shop::find($id);
+		if (!$shop) {
+			return response()->json(['error' => 'shop not found'], 404);
+		}
+
+		$shop->delete();
+
+		return response()->json(['message' => 'shop deleted successfully']);
+	}
+
 }
