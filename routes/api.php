@@ -73,6 +73,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 	// Shop Api Call here 
 	Route::get('/shops', [ShopController::class,  'getAllShop']);
+	Route::post('shop-add', [ShopController::class, 'postShop']);
 
 
 });
