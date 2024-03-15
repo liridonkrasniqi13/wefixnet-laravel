@@ -75,6 +75,8 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::get('/shops', [ShopController::class,  'getAllShop']);
 	Route::post('shop-add', [ShopController::class, 'postShop']);
 	Route::delete('shop-delete/{id}', [ShopController::class, 'deleteShop']);
-
+	Route::get('shop-id/{id}', [ShopController::class, 'getShopId']);
+	Route::put('shop-update/{id}', [ShopController::class, 'updateShop']);
+	Route::post('shop-update-image/{id}', [ShopController::class, 'updateShopImage']);
 
 });

@@ -38,40 +38,95 @@ class ShopController extends Controller
             return response()->json(['status' => 'error', 'message' => $validator->errors()->first()], 422);
         }
 
-        // Process the form submission
-        // ...
-
-        // Example of moving the uploaded file to the desired location
         $image_name = $request->file('image_name');
-        $fileName = time() . '_' . $image_name->getClientOriginalName();
+        $currentDateTime = now()->format('Y-m-d_His');
+        $fileName = $currentDateTime . '_' . time() . '_' . $image_name->getClientOriginalName();
         $image_name->move(public_path('uploads'), $fileName);
 
-        // Example of saving form data to database
         $shop = new Shop;
         $shop->author = $request->input('author');
-        $shop->comment = $request->input('comment');    
+        $shop->comment = $request->input('comment');
         $shop->smart = $request->input('smart');
         $shop->cash = $request->input('cash');
         $shop->raporti = $request->input('raporti');
         $shop->anulime = $request->input('anulime');
         $shop->saldo = $request->input('saldo');
-        $shop->date_now 	= date('d-m-y');
-        $shop->image_name = $fileName; // Save the file name to the database
+        $shop->date_now     = date('d-m-y');
+        $shop->image_name = $fileName; 
         $shop->save();
 
         return response()->json(['status' => 'success', 'message' => 'The file is uploaded'], 200);
     }
 
     public function deleteShop($id)
-	{
-		$shop = Shop::find($id);
-		if (!$shop) {
-			return response()->json(['error' => 'shop not found'], 404);
-		}
+    {
+        $shop = Shop::find($id);
+        if (!$shop) {
+            return response()->json(['error' => 'shop not found'], 404);
+        }
 
-		$shop->delete();
+        $shop->delete();
 
-		return response()->json(['message' => 'shop deleted successfully']);
-	}
+        return response()->json(['message' => 'shop deleted successfully']);
+    }
+
+    public function getShopId($id)
+    {
+        $shop = Shop::where('id', $id)->first();
+
+        if (!$shop) {
+            return response()->json(['error' => 'Post not found'], 404);
+        }
+
+        return response()->json($shop, 200);
+    }
+
+
+    public function updateShop(Request $request, $id)
+    {
+        $post = Shop::find($id);
+
+        if (!$post) {
+            return response()->json(['message' => 'Post not found'], 404);
+        }
+        $data = $request->all();
+
+        $post->author = $data['author'] ?? '';
+        $post->comment = $data['comment'] ?? '';
+        $post->smart = $data['smart'] ?? '';
+        $post->cash = $data['cash'] ?? '';
+        $post->raporti = $data['raporti'] ?? '';
+        $post->anulime = $data['anulime'] ?? '';
+        $post->saldo = $data['saldo'] ?? '';
+        $post->date_now = $data['date_now'] ?? '';
+        $post->image_name = $data['image_name'] ?? '';
+
+        $post->save();
+
+        return response()->json(['message' => 'Data inserted successfully'], 201);
+    }
+
+    public function updateShopImage(Request $request, $id)
+    {
+        $shop = Shop::find($id);
+
+        $request->validate([
+            'image_name' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+        ]);
+
+        if (!$shop) {
+            return response()->json(['message' => 'Shop not found'], 404);
+        }
+
+        $currentDateTime = now()->format('Y-m-d_His');
+        $originalFileName = $request->file('image_name')->getClientOriginalName();
+        $imageName = $currentDateTime . '_' . $originalFileName;
+        $shop->image_name = $imageName;
+        $shop->save();
+
+        $request->file('image_name')->move(public_path('uploads'), $imageName);
+
+        return response()->json(['message' => 'Image uploaded successfully', 'image' => $shop]);
+    }
 
 }
