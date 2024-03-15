@@ -129,4 +129,12 @@ class ShopController extends Controller
         return response()->json(['message' => 'Image uploaded successfully', 'image' => $shop]);
     }
 
+    public function getShopByAuthor($post_author) {
+        $posts = Shop::where('author', $post_author)
+                 ->orderBy('id', 'desc')
+                 ->paginate(20);
+
+    return response()->json($posts);
+    }
+
 }

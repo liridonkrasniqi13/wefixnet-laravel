@@ -78,5 +78,6 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::get('shop-id/{id}', [ShopController::class, 'getShopId']);
 	Route::put('shop-update/{id}', [ShopController::class, 'updateShop']);
 	Route::post('shop-update-image/{id}', [ShopController::class, 'updateShopImage']);
+	Route::get('shop-author/{post_author}', [ShopController::class,  'getShopByAuthor']);
 
 });
