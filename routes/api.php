@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepoController;
 use App\Http\Controllers\VeturatController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\OpticalKamenicController;
 use App\Models\Depo;
 
 /*
@@ -79,5 +80,12 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::put('shop-update/{id}', [ShopController::class, 'updateShop']);
 	Route::post('shop-update-image/{id}', [ShopController::class, 'updateShopImage']);
 	Route::get('shop-author/{post_author}', [ShopController::class,  'getShopByAuthor']);
+
+	// Optical Api Call here 
+	Route::get('optical-kamenic', [OpticalKamenicController::class, 'getOpticalKamenic']);
+	Route::post('optical-kamenic-add', [OpticalKamenicController::class, 'postOpticalKamenic']);
+	Route::delete('optical-kamenic-delete/{id}', [OpticalKamenicController::class, 'deleteOpticalKamenic']);
+	Route::get('optical-kamenic-id/{id}', [OpticalKamenicController::class, 'getKamenicId']);
+	Route::put('kamenic-update/{id}', [OpticalKamenicController::class, 'updateByIdKamenci']);
 
 });
