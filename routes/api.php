@@ -7,6 +7,8 @@ use App\Http\Controllers\DepoController;
 use App\Http\Controllers\VeturatController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\OpticalKamenicController;
+use App\Http\Controllers\OpticalVitiController;
+use App\Http\Controllers\OpticalProjectController;
 use App\Models\Depo;
 
 /*
@@ -81,11 +83,26 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::post('shop-update-image/{id}', [ShopController::class, 'updateShopImage']);
 	Route::get('shop-author/{post_author}', [ShopController::class,  'getShopByAuthor']);
 
-	// Optical Api Call here 
+	// Optical Kamenic Api Call here 
 	Route::get('optical-kamenic', [OpticalKamenicController::class, 'getOpticalKamenic']);
 	Route::post('optical-kamenic-add', [OpticalKamenicController::class, 'postOpticalKamenic']);
 	Route::delete('optical-kamenic-delete/{id}', [OpticalKamenicController::class, 'deleteOpticalKamenic']);
 	Route::get('optical-kamenic-id/{id}', [OpticalKamenicController::class, 'getKamenicId']);
 	Route::put('kamenic-update/{id}', [OpticalKamenicController::class, 'updateByIdKamenci']);
+
+
+	// Optical Viti Api Call here 
+	Route::get('optical-viti', [OpticalVitiController::class, 'getOpticalViti']);
+	Route::post('optical-viti-add', [OpticalVitiController::class, 'postOpticalViti']);
+	Route::delete('optical-viti-delete/{id}', [OpticalVitiController::class, 'deleteOpticalViti']);
+	Route::get('optical-viti-id/{id}', [OpticalVitiController::class, 'getVitiId']);
+	Route::put('viti-update/{id}', [OpticalVitiController::class, 'updateByIdViti']);
+	
+	// Optical Project Api Call here 
+	Route::get('optical-project', [OpticalProjectController::class, 'getOpticalProject']);
+	Route::post('optical-project-add', [OpticalProjectController::class, 'postOpticalProject']);
+	Route::delete('optical-project-delete/{id}', [OpticalProjectController::class, 'deleteOpticalProject']);
+	Route::get('optical-project-id/{id}', [OpticalProjectController::class, 'getProjectId']);
+	Route::put('project-update/{id}', [OpticalProjectController::class, 'updateByIdProject']);
 
 });
