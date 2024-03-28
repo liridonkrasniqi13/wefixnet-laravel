@@ -9,6 +9,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\OpticalKamenicController;
 use App\Http\Controllers\OpticalVitiController;
 use App\Http\Controllers\OpticalProjectController;
+use App\Http\Controllers\OpticalDepoController;
 use App\Models\Depo;
 
 /*
@@ -104,5 +105,12 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::delete('optical-project-delete/{id}', [OpticalProjectController::class, 'deleteOpticalProject']);
 	Route::get('optical-project-id/{id}', [OpticalProjectController::class, 'getProjectId']);
 	Route::put('project-update/{id}', [OpticalProjectController::class, 'updateByIdProject']);
+
+	// Optical Depo Api Call here 
+	Route::get('optical-depo', [OpticalDepoController::class, 'getOpticalDepo']);
+	Route::post('optical-depo-add', [OpticalDepoController::class, 'postOpticalDepo']);
+	Route::delete('optical-depo-delete/{id}', [OpticalDepoController::class, 'deleteOpticalDepo']);
+	Route::get('optical-depo-id/{id}', [OpticalDepoController::class, 'getDepoId']);
+	Route::put('optical-depo-update/{id}', [OpticalDepoController::class, 'updateByIdDepo']);
 
 });
